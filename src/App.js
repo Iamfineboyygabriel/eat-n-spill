@@ -53,7 +53,7 @@ export default function App() {
     setSelectedFriend((cur) => (cur?.id === friend.id ? null : friend));
 
     setShowAddFriend(false);
-  };
+  }
 
   function handleSplitBill(value) {
     setFriends((friends) =>
@@ -65,7 +65,7 @@ export default function App() {
     );
 
     setSelectedFriend(null);
-  };
+  }
 
   return (
     <div className="app">
@@ -93,7 +93,7 @@ export default function App() {
       {/**so once we selecet a friend here the bill input would open else it would be invinsible*/}
     </div>
   );
-};
+}
 
 function FriendsList({ friends, onSelection, selectedFriend }) {
   return (
@@ -108,7 +108,7 @@ function FriendsList({ friends, onSelection, selectedFriend }) {
       ))}
     </ul>
   );
-};
+}
 
 function Friend({ friend, onSelection, selectedFriend }) {
   const isSelected = selectedFriend?.id === friend.id;
@@ -136,7 +136,7 @@ function Friend({ friend, onSelection, selectedFriend }) {
       </button>
     </li>
   );
-};
+}
 
 function FormAddFriend({ onAddFriend }) {
   // Here we write a use state that helps us add a friend
@@ -160,7 +160,7 @@ function FormAddFriend({ onAddFriend }) {
     // Here we set the input back to empty
     setName("");
     setImage("https://i.pravatar.cc/48");
-  };
+  }
 
   return (
     <form className="form-add-friend" onSubmit={handleSubmit}>
@@ -181,7 +181,7 @@ function FormAddFriend({ onAddFriend }) {
       <Button>Add</Button>
     </form>
   );
-};
+}
 
 // FORM SPLIT BILL
 function FormSplitBill({ selectedFriend, onSplitBill }) {
@@ -193,9 +193,13 @@ function FormSplitBill({ selectedFriend, onSplitBill }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (bill || !paidByUser) return;
+    if (!bill || !paidByUser) return;
     onSplitBill(whoIsPaying === "user" ? paidByFriend : -paidByFriend);
-  };
+
+    // Reset form fields
+    setBill("");
+    setPaidByUser("");
+  }
 
   return (
     <form action="form" className="form-split-bill" onSubmit={handleSubmit}>
@@ -235,4 +239,4 @@ function FormSplitBill({ selectedFriend, onSplitBill }) {
       <Button>Split Bill</Button>
     </form>
   );
-};
+}
