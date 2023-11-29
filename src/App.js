@@ -88,6 +88,7 @@ export default function App() {
         <FormSplitBill
           selectedFriend={selectedFriend}
           onSplitBill={handleSplitBill}
+          key={selectedFriend.id}
         />
       )}
       {/**so once we selecet a friend here the bill input would open else it would be invinsible*/}
